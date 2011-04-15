@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Moq;
+﻿//----------------------------------------------------------------------
+// <copyright file="ManifestTests.cs" company="Stephen Jennings">
+//   Copyright (c) 2011 Stephen Jennings
+// </copyright>
+//----------------------------------------------------------------------
 
 namespace Fulcrum.Models.Tests.Assets
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Moq;
+    using NUnit.Framework;
+
     [TestFixture]
-    class ManifestTests
+    public class ManifestTests
     {
         [Test]
         public void Add_skuable_item_increase_count_by_one()
@@ -60,6 +66,7 @@ namespace Fulcrum.Models.Tests.Assets
             Assert.AreEqual(2, manifest[sku1]);
             Assert.AreEqual(2, manifest[sku2]);
         }
+
         [Test]
         public void Remove_skuable_item_decreases_count_by_one()
         {

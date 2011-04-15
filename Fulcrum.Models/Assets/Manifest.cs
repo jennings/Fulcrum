@@ -24,6 +24,38 @@ namespace Fulcrum.Models
         public virtual int Id { get; set; }
 
         /// <summary>
+        /// Returns the count of an item on this manifest.
+        /// </summary>
+        /// <param name="sku">The SKU to check</param>
+        /// <returns>The count of the SKU on this manifest.</returns>
+        public virtual int this[Sku sku]
+        {
+            get
+            {
+                if (this.skuCounts.ContainsKey(sku.SkuId))
+                {
+                    return this.skuCounts[sku.SkuId];
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+            set
+            {
+                if (this.skuCounts.ContainsKey(sku.SkuId))
+                {
+                    this.skuCounts[sku.SkuId]++;
+                }
+                else
+                {
+                    this.skuCounts[sku.SkuId] = 1;
+                }
+            }
+        }
+
+        /// <summary>
         /// Adds a nonspecific skuable item to the manifest.
         /// </summary>
         /// <param name="item">The item to add.</param>
@@ -52,37 +84,6 @@ namespace Fulcrum.Models
             else
             {
                 throw new InvalidOperationException("Cannot decrease count of SKU '" + item.SkuId + "' below zero.");
-            }
-        }
-
-        /// <summary>
-        /// Returns the count of an item on this manifest.
-        /// </summary>
-        /// <param name="sku">The SKU to check</param>
-        /// <returns>The count of the SKU on this manifest.</returns>
-        public virtual int this[Sku sku]
-        {
-            get
-            {
-                if (this.skuCounts.ContainsKey(sku.SkuId))
-                {
-                    return this.skuCounts[sku.SkuId];
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            set
-            {
-                if (this.skuCounts.ContainsKey(sku.SkuId))
-                {
-                    this.skuCounts[sku.SkuId]++;
-                }
-                else
-                {
-                    this.skuCounts[sku.SkuId] = 1;
-                }
             }
         }
     }
