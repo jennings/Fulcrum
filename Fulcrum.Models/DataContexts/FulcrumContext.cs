@@ -42,10 +42,5 @@ namespace Fulcrum.Models.DataContexts
         /// Gets or sets the products in this data context.
         /// </summary>
         public DbSet<Product> Products { get; set; }
-
-        /// <summary>
-        /// Gets or sets the product assets in this data context.
-        /// </summary>
-        public DbSet<ProductAsset> ProductAssets { get; set; }
     }
 }

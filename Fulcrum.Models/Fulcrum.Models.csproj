@@ -49,10 +49,8 @@
   <ItemGroup>
     <Compile Include="Assets\Manifest.cs" />
     <Compile Include="Assets\Part.cs" />
-    <Compile Include="Assets\IUniquelyIdentifiable.cs" />
-    <Compile Include="Assets\ISkuable.cs" />
     <Compile Include="Assets\Product.cs" />
-    <Compile Include="Assets\ProductAsset.cs" />
+    <Compile Include="Assets\Sku.cs" />
     <Compile Include="Companies\Company.cs" />
     <Compile Include="Companies\Contact.cs" />
     <Compile Include="Companies\Corporation.cs" />

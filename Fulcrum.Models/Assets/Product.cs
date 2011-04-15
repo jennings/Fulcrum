@@ -14,7 +14,7 @@ namespace Fulcrum.Models
     /// <summary>
     /// Reprents a type of product. For example, "Toyota Camry", "Honda Civic", "Volkswagen GTI".
     /// </summary>
-    public class Product : ISkuable
+    public class Product
     {
         /// <summary>
         /// Gets or sets the Id.
@@ -24,7 +24,7 @@ namespace Fulcrum.Models
         /// <summary>
         /// Gets or sets the SKU.
         /// </summary>
-        public string Sku { get; set; }
+        public Sku Sku { get; set; }
 
         /// <summary>
         /// Gets or sets the name.

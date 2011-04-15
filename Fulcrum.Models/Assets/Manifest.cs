@@ -16,41 +16,74 @@ namespace Fulcrum.Models
     /// </summary>
     public class Manifest
     {
+        private Dictionary<string, int> skuCounts = new Dictionary<string, int>();
+
         /// <summary>
         /// Gets or sets the Id.
         /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// Adds a uniquely identifiable item to the manifest.
-        /// </summary>
-        /// <param name="item">The item to add.</param>
-        public void Add(IUniquelyIdentifiable item)
-        {
-        }
+        public virtual int Id { get; set; }
 
         /// <summary>
         /// Adds a nonspecific skuable item to the manifest.
         /// </summary>
         /// <param name="item">The item to add.</param>
-        public void Add(ISkuable item)
+        public virtual void Add(Sku item)
         {
-        }
-
-        /// <summary>
-        /// Removes a uniquely identifiable item from the manifest.
-        /// </summary>
-        /// <param name="item">The item to remove.</param>
-        public void Remove(IUniquelyIdentifiable item)
-        {
+            if (this[item] > 0)
+            {
+                this.skuCounts[item.SkuId]++;
+            }
+            else
+            {
+                this.skuCounts[item.SkuId] = 1;
+            }
         }
 
         /// <summary>
         /// Removes a nonspecific skuable item from the manifest.
         /// </summary>
         /// <param name="item">The item to remove.</param>
-        public void Remove(ISkuable item)
+        public virtual void Remove(Sku item)
         {
+            if (this[item] > 0)
+            {
+                this.skuCounts[item.SkuId]--;
+            }
+            else
+            {
+                throw new InvalidOperationException("Cannot decrease count of SKU '" + item.SkuId + "' below zero.");
+            }
+        }
+
+        /// <summary>
+        /// Returns the count of an item on this manifest.
+        /// </summary>
+        /// <param name="sku">The SKU to check</param>
+        /// <returns>The count of the SKU on this manifest.</returns>
+        public virtual int this[Sku sku]
+        {
+            get
+            {
+                if (this.skuCounts.ContainsKey(sku.SkuId))
+                {
+                    return this.skuCounts[sku.SkuId];
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                if (this.skuCounts.ContainsKey(sku.SkuId))
+                {
+                    this.skuCounts[sku.SkuId]++;
+                }
+                else
+                {
+                    this.skuCounts[sku.SkuId] = 1;
+                }
+            }
         }
     }
 }

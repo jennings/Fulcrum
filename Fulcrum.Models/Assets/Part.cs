@@ -14,7 +14,7 @@ namespace Fulcrum.Models
     /// <summary>
     /// Reprents a type of part. For example, "104-K-123 oil drip pan", "IGK2930 steering wheel", "394K stick shift knob".
     /// </summary>
-    public class Part : ISkuable
+    public class Part
     {
         /// <summary>
         /// Gets or sets the Id.
@@ -24,7 +24,7 @@ namespace Fulcrum.Models
         /// <summary>
         /// Gets or sets the SKU.
         /// </summary>
-        public string Sku { get; set; }
+        public Sku Sku { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
