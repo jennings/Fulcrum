@@ -11,7 +11,7 @@ namespace Fulcrum.Models.DataContexts
     /// <summary>
     /// A data context for Fulcrum entities.
     /// </summary>
-    public class FulcrumContext : DbContext
+    internal class FulcrumContext : DbContext
     {
         /// <summary>
         /// Gets or sets companies in this data context.

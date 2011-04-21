@@ -47,16 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Manifest.cs" />
-    <Compile Include="Assets\Part.cs" />
-    <Compile Include="Assets\Product.cs" />
-    <Compile Include="Assets\Sku.cs" />
-    <Compile Include="Companies\Company.cs" />
-    <Compile Include="Companies\Contact.cs" />
-    <Compile Include="Companies\Corporation.cs" />
+    <Compile Include="Entities\Assets\Part.cs" />
+    <Compile Include="Entities\Assets\Product.cs" />
+    <Compile Include="Entities\Assets\Sku.cs" />
+    <Compile Include="Entities\Companies\Company.cs" />
+    <Compile Include="Entities\Companies\Contact.cs" />
+    <Compile Include="Entities\Companies\Corporation.cs" />
     <Compile Include="DataContexts\FulcrumContext.cs" />
-    <Compile Include="Services\Incident.cs" />
+    <Compile Include="Entities\Services\Incident.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IFulcrumRepository.cs" />
+    <Compile Include="Repositories\SqlFulcrumRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
