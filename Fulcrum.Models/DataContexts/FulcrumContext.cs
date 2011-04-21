@@ -14,6 +14,15 @@ namespace Fulcrum.Models.DataContexts
     internal class FulcrumContext : DbContext
     {
         /// <summary>
+        /// Initializes a new instance of the FulcrumContext class.
+        /// </summary>
+        /// <param name="connectionString">The connection string to the database.</param>
+        public FulcrumContext(string connectionString)
+            : base(connectionString)
+        {
+        }
+
+        /// <summary>
         /// Gets or sets companies in this data context.
         /// </summary>
         public DbSet<Company> Companies { get; set; }

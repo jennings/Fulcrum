@@ -16,6 +16,11 @@ namespace Fulcrum.Models.Repositories
     /// </summary>
     public interface IFulcrumRepository
     {
-        IEnumerable<Company> FindCompanyById(int id);
+        /// <summary>
+        /// Finds a company by the given Id, or null if it does not exist.
+        /// </summary>
+        /// <param name="id">The Id to find.</param>
+        /// <returns>The company to find, if any.</returns>
+        Company FindCompanyById(int id);
     }
 }

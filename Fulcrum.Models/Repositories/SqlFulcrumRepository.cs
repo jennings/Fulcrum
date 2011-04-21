@@ -17,11 +17,32 @@ namespace Fulcrum.Models.Repositories
     /// </summary>
     public class SqlFulcrumRepository : IFulcrumRepository
     {
-        public SqlFulcrumRepository(FulcrumContext context)
+        private readonly FulcrumContext context;
+
+        /// <summary>
+        /// Initializes a new instance of the SqlFulcrumRepository class.
+        /// </summary>
+        /// <param name="connectionString">Connection string to the database.</param>
+        public SqlFulcrumRepository(string connectionString)
         {
+            this.context = new FulcrumContext(connectionString);
         }
 
-        public IEnumerable<Company> FindCompanyById(int id)
+        /// <summary>
+        /// Initializes a new instance of the SqlFulcrumRepository class.
+        /// </summary>
+        /// <param name="context">The data context to use.</param>
+        internal SqlFulcrumRepository(FulcrumContext context)
+        {
+            this.context = context;
+        }
+
+        /// <summary>
+        /// Finds a company with the given Id, or null if it does not exist.
+        /// </summary>
+        /// <param name="id">The Id to find.</param>
+        /// <returns>The company found, if any.</returns>
+        public Company FindCompanyById(int id)
         {
             throw new NotImplementedException();
         }

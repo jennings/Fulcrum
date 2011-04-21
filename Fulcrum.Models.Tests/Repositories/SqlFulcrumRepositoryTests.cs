@@ -8,13 +8,13 @@ namespace Fulcrum.Models.Tests.Repositories
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using System.Text;
-    using NUnit.Framework;
+    using Fulcrum.Models.DataContexts;
     using Fulcrum.Models.Repositories;
     using Moq;
-    using Fulcrum.Models.DataContexts;
-    using System.Data.Entity;
+    using NUnit.Framework;
 
     [TestFixture]
     public class SqlFulcrumRepositoryTests
@@ -24,6 +24,7 @@ namespace Fulcrum.Models.Tests.Repositories
         {
             var contextMock = new Mock<FulcrumContext>();
             contextMock.SetupAllProperties();
+
             var context = contextMock.Object;
             context.Companies.Add(new Company() { Id = 1, Name = "Alpha" });
             context.Companies.Add(new Company() { Id = 2, Name = "Bravo" });
