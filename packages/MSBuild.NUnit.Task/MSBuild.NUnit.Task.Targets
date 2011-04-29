@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<UsingTask AssemblyFile="MSBuild.NUnit.Task.dll" TaskName="MSBuild.NUnit.NUnitIntegrated" />
+
+	<PropertyGroup>
+		<BuildDependsOn>$(BuildDependsOn);IntegratedTest</BuildDependsOn>
+	</PropertyGroup>
+	
+	<!-- Treat failed tests as errors is on by default -->
+	<PropertyGroup Condition="'$(NUnitTreatFailedTestsAsErrors)' == ''">
+		<NUnitTreatFailedTestsAsErrors>true</NUnitTreatFailedTestsAsErrors>
+	</PropertyGroup>
+
+	<!-- path to nunit testing console tool - default: path to NUnit 2.5 -->
+	<PropertyGroup Condition="'$(NUnitConsoleToolPath)' == ''">
+		<NUnitConsoleToolPath>C:\Program Files\NUnit 2.5\bin\net-2.0</NUnitConsoleToolPath>
+	</PropertyGroup>
+
+	<!-- console tool name - default: nunit-console.exe -->
+	<PropertyGroup Condition="'$(NUnitConsoleTool)' == ''">
+		<NUnitConsoleTool>nunit-console</NUnitConsoleTool>
+	</PropertyGroup>
+
+	<Target Name="IntegratedTest">
+		<NUnitIntegrated
+			TreatFailedTestsAsErrors="$(NUnitTreatFailedTestsAsErrors)"
+			AssemblyName="$(AssemblyName)"
+			OutputPath="$(OutputPath)"
+			ConsoleToolPath="$(NUnitConsoleToolPath)"
+			ConsoleTool="$(NUnitConsoleTool)"
+			/>
+	</Target>
+</Project>

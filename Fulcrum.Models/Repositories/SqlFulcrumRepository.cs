@@ -17,7 +17,7 @@ namespace Fulcrum.Models.Repositories
     /// </summary>
     public class SqlFulcrumRepository : IFulcrumRepository
     {
-        private readonly FulcrumContext context;
+        private readonly IFulcrumContext context;
 
         /// <summary>
         /// Initializes a new instance of the SqlFulcrumRepository class.
@@ -32,7 +32,7 @@ namespace Fulcrum.Models.Repositories
         /// Initializes a new instance of the SqlFulcrumRepository class.
         /// </summary>
         /// <param name="context">The data context to use.</param>
-        internal SqlFulcrumRepository(FulcrumContext context)
+        internal SqlFulcrumRepository(IFulcrumContext context)
         {
             this.context = context;
         }
@@ -44,7 +44,7 @@ namespace Fulcrum.Models.Repositories
         /// <returns>The company found, if any.</returns>
         public Company FindCompanyById(int id)
         {
-            throw new NotImplementedException();
+            return this.context.Companies.Find(id);
         }
     }
 }
