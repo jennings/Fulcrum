@@ -21,6 +21,8 @@ namespace Fulcrum.Models.Tests.Repositories
     {
         private Mock<IFulcrumContext> contextMock;
 
+        #region SetUp
+
         [SetUp]
         public void SetUp()
         {
@@ -36,6 +38,10 @@ namespace Fulcrum.Models.Tests.Repositories
             this.contextMock.SetupGet(d => d.Companies).Returns(companyDbSet);
         }
 
+        #endregion
+
+        #region FindCompany Tests
+
         [Test]
         public void FindCompanyById_returns_null_if_id_does_not_exist()
         {
@@ -48,9 +54,64 @@ namespace Fulcrum.Models.Tests.Repositories
         public void FindCompanyById_returns_the_right_company_if_it_exists()
         {
             var repo = new SqlFulcrumRepository(this.contextMock.Object);
+
             var returnedCompany = repo.FindCompanyById(3);
             Assert.AreEqual(3, returnedCompany.Id);
             Assert.AreEqual("Charlie Corporation", returnedCompany.Name);
+
+            var returnedCompany2 = repo.FindCompanyById(4);
+            Assert.AreEqual(4, returnedCompany2.Id);
+            Assert.AreEqual("Delta Corporation", returnedCompany2.Name);
         }
+
+        #endregion
+
+        #region AddCompany Tests
+
+        [Test]
+        public void AddCompany_throws_on_null_input()
+        {
+            var repo = new SqlFulcrumRepository(this.contextMock.Object);
+            Assert.Throws<ArgumentNullException>(() => repo.AddCompany(null));
+        }
+
+        [Test]
+        public void AddCompany_throws_on_null_or_empty_name()
+        {
+            var companyWithNullName = new Company() { Name = null };
+            var companyWithEmptyName = new Company() { Name = String.Empty };
+            var repo = new SqlFulcrumRepository(this.contextMock.Object);
+
+            Assert.Throws<ArgumentException>(() => repo.AddCompany(companyWithNullName));
+            Assert.Throws<ArgumentException>(() => repo.AddCompany(companyWithEmptyName));
+        }
+
+        [Test]
+        public void AddCompany_passes_valid_company_to_dbcontext()
+        {
+            var company = new Company() { Id = 5, Name = "Echo Corporation" };
+
+            this.contextMock.Setup(c => c.Companies.Add(It.IsAny<Company>())).Verifiable();
+
+            var repo = new SqlFulcrumRepository(this.contextMock.Object);
+            repo.AddCompany(company);
+
+            this.contextMock.Verify(c => c.Companies.Add(company));
+        }
+
+        [Test]
+        public void AddCompany_passes_valid_company_with_default_id_to_dbcontext()
+        {
+            var company = new Company() { Name = "Echo Corporation" };
+
+            this.contextMock.Setup(c => c.Companies.Add(It.IsAny<Company>())).Verifiable();
+
+            var repo = new SqlFulcrumRepository(this.contextMock.Object);
+            repo.AddCompany(company);
+
+            this.contextMock.Verify(c => c.Companies.Add(company));
+        }
+
+        #endregion
     }
 }

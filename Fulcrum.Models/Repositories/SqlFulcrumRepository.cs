@@ -46,5 +46,24 @@ namespace Fulcrum.Models.Repositories
         {
             return this.context.Companies.Find(id);
         }
+
+        /// <summary>
+        /// Adds a new company to the database.
+        /// </summary>
+        /// <param name="company">The company to add.</param>
+        public void AddCompany(Company company)
+        {
+            if (company == null)
+            {
+                throw new ArgumentNullException("company");
+            }
+
+            if (company.Name == null || company.Name == String.Empty)
+            {
+                throw new ArgumentException("Company name must not be empty.", "company");
+            }
+
+            this.context.Companies.Add(company);
+        }
     }
 }
